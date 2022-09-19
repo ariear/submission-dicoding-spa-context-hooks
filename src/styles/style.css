@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background-color: #F9FFA4;
+}
+nav{
+    position: relative;
+    padding: 18px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #F7A76C;
+    color: white;
+}
+nav h1{
+    display: flex;
+    align-items: center;
+}
+nav h1 a{
+    text-decoration: none;
+    color: white;
+    margin-right: 10px;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+}
+
+nav ul li{
+    margin-right: 30px;
+    list-style: none;
+    font-weight: 500;
+}
+
+nav ul li a{
+    color: white;
+    text-decoration: none;
+}
+.nav-list-mobile{
+    display: none;
+}
+
+.nav-list-mobile-child{
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #F7A76C;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: .3s all ease;
+}
+.nav-list-mobile-child li {
+    margin-bottom: 20px;
+}
+.icon-menu{
+    position: relative;
+    z-index: 50;
+}
+.container{
+    padding: 40px 0;
+    width: 1200px;
+    margin: auto;
+}
+.container h1{
+    font-size: 35px;
+}
+@media screen and (max-width: 1200px) {
+    .container{
+        width: 90vw;
+    }
+}
+@media screen and (max-width: 476px) {
+    .container{
+        padding: 30px 0;
+    }
+    .container h1{
+        font-size: 28px;
+    }
+}
+@media screen and (max-width: 640px) {
+    nav{
+        justify-content: space-between;
+        padding: 18px 20px;
+    }
+    .nav-list{
+        display: none;
+    }
+    .nav-list-mobile{
+        display: block;
+    }
+}
+
+.note-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.cardNote{
+    border-radius: 10px;
+    color: white;
+    margin-top: 20px;
+    background-color: #F7A76C;
+    width: 360px;
+    padding: 15px;
+    text-decoration: none;
+}
+@media screen and (max-width: 1024px) {
+    .cardNote{
+        width: 265px;
+    }
+}
+.title-card{
+    font-size: 22px;
+    font-weight: 600;
+}
+.date-card{
+    text-align: end;
+    padding-top: 15px;
+}
+
+.text-note-not-found{
+    padding-top: 20px;
+    margin: auto;
+}
+
+.title-detail{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.content-detail{
+    padding-top: 20px;
+}
+
+
+.form-input{
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input input , textarea, button{
+    padding: 20px;
+    background-color: #F7A76C;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.form-input input::placeholder, textarea::placeholder {
+    color: rgb(247, 243, 243);
+}
+
+.search-input{
+    margin-top: 20px;
+    padding: 10px 15px;
+    width: 300px;
+    border: 2px solid #F7A76C;
+    border-radius: 8px;
+}
+
+/* Login */
+.container-form{
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.form-parent{
+    background-color: white;
+    width: 400px;
+    text-align: center;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 7px 7px 5px rgba(0, 0, 0, 0.4);
+}
+.btn-auth{
+    padding: 15px 20px;
+}
