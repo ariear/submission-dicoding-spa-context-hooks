@@ -5,10 +5,8 @@ const NoteList = ({notes,messageNotFound,keyword,loading}) => {
     return (
         <div className="note-list">
             {
-                loading && <h2>Loading...</h2>
-            }
-            {
-                notes.length > 0 &&
+                loading ? <h2>Loading...</h2> :
+                notes.length > 0 ?
 
                 notes.filter((note) => {
                     if (keyword === '') {
@@ -20,6 +18,8 @@ const NoteList = ({notes,messageNotFound,keyword,loading}) => {
                 }).map(note => 
                     <CardNote key={note.id} note={note} />
                 )
+                    :
+                <h2>{messageNotFound}</h2>
             }
         </div>
     )

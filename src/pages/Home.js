@@ -37,7 +37,7 @@ const Home = ({authedUser}) => {
       <h2>{locale === 'id' ? 'Hai' : 'Hello'} {authedUser.name}</h2>
       </div>
       <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
-      <NoteList notes={notes} keyword={keyword} loading={loading} messageNotFound="Tidak ada catatan" />
+      <NoteList notes={notes} keyword={keyword} loading={loading} messageNotFound={locale === 'id' ? 'Tidak ada catatan' : 'Note not found'} />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import LocaleContext from "../contexts/LocaleContext";
 import useInput from "../contexts/useInput";
@@ -6,6 +6,7 @@ import { addNote } from "../utils/network-data";
 
 const NoteInputWrapper = () => {
     const {locale} = useContext(LocaleContext)
+    const [loading,setLoading] = useState(false)
 
     const navigate = useNavigate();
 
@@ -14,13 +15,17 @@ const NoteInputWrapper = () => {
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
+        setLoading(true)
 
         await addNote({title,body})
-
+        setLoading(false)
         navigate('/')
     }
 
     return (
+        <>
+        {
+            loading ? <h2 style={{ textAlign: 'center' }}>Loading...</h2> :
         <form className="form-input" onSubmit={onSubmitHandler}>
             <div className="wrap-input">
                 <input type="text" placeholder={locale === 'id' ? 'Tulis judul disini' : 'Title here'} value={title} onChange={handleTitleChange} required />
@@ -30,6 +35,8 @@ const NoteInputWrapper = () => {
             </div>
             <button>{locale === 'id' ? 'tambah' : 'add'}</button>
         </form>        
+        }
+        </>
     )
 }
 

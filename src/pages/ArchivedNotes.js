@@ -35,7 +35,7 @@ const ArchivedNotes = () => {
         <div className="container">
         <h1>{locale === 'id' ? 'Catatan Terarsip' : 'Archived Notes'}</h1>
         <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
-        <NoteList notes={notes} loading={loading} keyword={keyword} messageNotFound="Arsip kosong" />
+        <NoteList notes={notes} loading={loading} keyword={keyword} messageNotFound={locale === 'id' ? 'Arsip kosong' : 'Archive not found'} />
         </div>
     )
 }

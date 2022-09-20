@@ -3,7 +3,7 @@ import useInput from "../contexts/useInput"
 import PropTypes from 'prop-types';
 import LocaleContext from "../contexts/LocaleContext";
 
-const RegisterInput = ({register}) => {
+const RegisterInput = ({register,loading}) => {
     const {locale} = useContext(LocaleContext)
 
     const [name,handleNameChange] = useInput('')
@@ -33,6 +33,9 @@ const RegisterInput = ({register}) => {
 
     return (
         <form onSubmit={onSubmitHandler} className="form-input">
+            {loading ? <img src="/loading.svg" width={170} style={{ margin: 'auto' }} alt="" /> 
+            :
+            <>
             <div className="wrap-input">
                 <input type="text" value={name} onChange={handleNameChange} placeholder="name" required />
             </div>
@@ -48,12 +51,14 @@ const RegisterInput = ({register}) => {
                 <p className="text-error">{errors.cnfrmpassword}</p>
             </div>
             <button className="btn-auth">{locale === 'id' ? 'Daftar' : 'Sign Up'}</button>
+            </>}
         </form>
     )
 }
 
 RegisterInput.prototype = {
-    register: PropTypes.func.isRequired
+    register: PropTypes.func.isRequired,
+    loading: PropTypes.bool
 }
 
 export default RegisterInput

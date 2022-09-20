@@ -42,7 +42,7 @@ const DetailNoteWrapper = () => {
 
         return(
             <>
-            {loading && <h2 style={{ textAlign: 'center',paddingTop: 40 }}>Loading...</h2>}
+            {loading && <h2 style={{ textAlign: 'center',paddingTop: 40 , color: '#F7A76C'}}>Loading...</h2>}
             { !note ? (
                 <NotFound />
             ) : (

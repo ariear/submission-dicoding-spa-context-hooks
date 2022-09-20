@@ -3,7 +3,7 @@ import useInput from "../contexts/useInput"
 import PropTypes from 'prop-types';
 import LocaleContext from "../contexts/LocaleContext";
 
-const LoginInput = ({login}) => {
+const LoginInput = ({login,loading}) => {
     const {locale} = useContext(LocaleContext)
 
     const [email,handleEmailChange] = useInput('')
@@ -28,21 +28,29 @@ const LoginInput = ({login}) => {
 
     return (
     <form onSubmit={onSubmitHandler} className="form-input">
-        <div className="wrap-input">
-            <input type="email" value={email} onChange={handleEmailChange} placeholder="email" required />
-            <p className="text-error"></p>
-        </div>
-        <div className="wrap-input">
-            <input type="password" value={password} onChange={handlePasswordChange} placeholder="password" required />
-            <p className="text-error">{errors.password}</p>
-        </div>
-        <button className="btn-auth">{locale === 'id' ? 'Masuk' : 'Sign In'}</button>
+        {
+            loading ?
+            <img src="/loading.svg" width={170} style={{ margin: 'auto' }} alt="" />
+                :
+            <>
+            <div className="wrap-input">
+                <input type="email" value={email} onChange={handleEmailChange} placeholder="email" required />
+                <p className="text-error"></p>
+            </div>
+            <div className="wrap-input">
+                <input type="password" value={password} onChange={handlePasswordChange} placeholder="password" required />
+                <p className="text-error">{errors.password}</p>
+            </div>
+            <button className="btn-auth">{locale === 'id' ? 'Masuk' : 'Sign In'}</button>
+            </>
+        }
     </form>
     )
 }
 
 LoginInput.prototype = {
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    loading: PropTypes.bool
 }
 
 export default LoginInput

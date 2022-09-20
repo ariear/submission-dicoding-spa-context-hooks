@@ -3,15 +3,17 @@ import LoginInput from "../components/LoginInput"
 import { login } from "../utils/network-data"
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import LocaleContext from "../contexts/LocaleContext";
 
 const LoginPage = ({loginSuccess}) => {
     const {locale} = useContext(LocaleContext)
+    const [loading,setLoading] = useState(false)
 
     const onLogin = async ({email,password}) => {
+        setLoading(true)
         const {error,data, message} = await login({email,password})
-
+        setLoading(false)
         if (!error) {
             loginSuccess(data)
         }else{
@@ -32,7 +34,7 @@ const LoginPage = ({loginSuccess}) => {
             <div className="form-parent">
                 <ToastContainer />
                 <h2>{locale === 'id' ? 'Masuk!' : 'Sign In!'}</h2>
-                <LoginInput login={onLogin} />
+                <LoginInput loading={loading} login={onLogin} />
                 <p><Link to='/register'>{locale === 'id' ? 'Tidak punya akun?' : `Don't Have account?`}</Link></p>
             </div>
         </div>
