@@ -1,11 +1,14 @@
 import CardNote from "./CardNote"
 import PropTypes from 'prop-types';
 
-const NoteList = ({notes,messageNotFound,keyword}) => {
+const NoteList = ({notes,messageNotFound,keyword,loading}) => {
     return (
         <div className="note-list">
             {
-                notes.length > 0 ?
+                loading && <h2>Loading...</h2>
+            }
+            {
+                notes.length > 0 &&
 
                 notes.filter((note) => {
                     if (keyword === '') {
@@ -17,8 +20,6 @@ const NoteList = ({notes,messageNotFound,keyword}) => {
                 }).map(note => 
                     <CardNote key={note.id} note={note} />
                 )
-                    :
-                <p className="text-note-not-found">{messageNotFound}</p>
             }
         </div>
     )
@@ -26,7 +27,8 @@ const NoteList = ({notes,messageNotFound,keyword}) => {
 
 NoteList.propTypes = {
     notes: PropTypes.arrayOf(PropTypes.object).isRequired,
-    messageNotFound: PropTypes.string.isRequired
+    messageNotFound: PropTypes.string.isRequired,
+    loading: PropTypes.bool
 }
 
 export default NoteList

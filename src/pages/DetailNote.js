@@ -10,7 +10,7 @@ const DetailNoteWrapper = () => {
     const navigate = useNavigate();
     
     const [note,setNote] = useState({})
-    
+    const [loading,setLoading] = useState(true)
     
     const onArchivedAndActiveHandler = async (id,archived) => {
         if (archived) {
@@ -31,8 +31,10 @@ const DetailNoteWrapper = () => {
     
     useEffect(() => {
         const getDetailNote = async () => {
+            setLoading(true)
             const {data} = await getNote(id)
             setNote(data)
+            setLoading(false)
         }
         
         getDetailNote()    
@@ -40,6 +42,7 @@ const DetailNoteWrapper = () => {
 
         return(
             <>
+            {loading && <h2 style={{ textAlign: 'center',paddingTop: 40 }}>Loading...</h2>}
             { !note ? (
                 <NotFound />
             ) : (
@@ -51,7 +54,10 @@ const DetailNoteWrapper = () => {
                 <DeleteBtn id={note.id} onDeleteHandler={onDeleteHandler} />
                 </div>
                 </div>
+                {
+                    note.createdAt &&
                 <p>{new Date(note.createdAt).toLocaleDateString('en-US',{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                }
                 <p className="content-detail">{note.body}</p>
             </div>
             )}

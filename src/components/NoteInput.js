@@ -1,9 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom";
+import LocaleContext from "../contexts/LocaleContext";
 import useInput from "../contexts/useInput";
 import { addNote } from "../utils/network-data";
 
 const NoteInputWrapper = () => {
+    const {locale} = useContext(LocaleContext)
+
     const navigate = useNavigate();
 
     const [title,handleTitleChange] = useInput('')
@@ -19,9 +22,13 @@ const NoteInputWrapper = () => {
 
     return (
         <form className="form-input" onSubmit={onSubmitHandler}>
-            <input type="text" placeholder="Title here" value={title} onChange={handleTitleChange} required />
-            <textarea cols="30" rows="10" placeholder="Body here" value={body} onChange={handleBodyChange} required></textarea>
-            <button>Add</button>
+            <div className="wrap-input">
+                <input type="text" placeholder={locale === 'id' ? 'Tulis judul disini' : 'Title here'} value={title} onChange={handleTitleChange} required />
+            </div>
+            <div className="wrap-input">
+                <textarea cols="30" rows="10" placeholder={locale === 'id' ? 'Tulis isi catatan disini' : 'Body here'} value={body} onChange={handleBodyChange} required></textarea>
+            </div>
+            <button>{locale === 'id' ? 'tambah' : 'add'}</button>
         </form>        
     )
 }

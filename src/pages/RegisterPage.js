@@ -1,23 +1,40 @@
 import { Link , useNavigate} from "react-router-dom"
 import RegisterInput from "../components/RegisterInput"
 import { register } from "../utils/network-data";
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useContext } from "react";
+import LocaleContext from "../contexts/LocaleContext";
 
 const RegisterPage = () => {
+    const {locale} = useContext(LocaleContext)
+
     const navigate = useNavigate();
 
     const onRegisterHandler = async (user) => {
-        const {error} = await register(user)
+        const {error,message} = await register(user)
         if (!error) {
             navigate('/')
+        }else{
+            toast.error(message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         }
     }
 
     return (
         <div className="container-form">
             <div className="form-parent">
-                <h2>Sign Up!</h2>
+                <ToastContainer />
+                <h2>{locale === 'id' ? 'Daftar!' : 'Sign Up!'}</h2>
                 <RegisterInput register={onRegisterHandler} />
-                <p><Link to='/login'>Have account?</Link></p>
+                <p><Link to='/login'>{locale === 'id' ? 'Punya akun?' : 'Have account?'}</Link></p>
             </div>
         </div>
     )

@@ -1,12 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+:root {
+    --font-color: #333;
+    --nav-background-color: #F7A76C;
+    --body-background-color: #F9FFA4
+  }
+   
+  [data-theme='dark'] {
+    --font-color: #eee;
+    --nav-background-color: #333;
+    --body-background-color: #16213E
+  }
 *{
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
 body{
-    background-color: #F9FFA4;
+    background-color: var(--body-background-color);
+    transition: .4s all ease;
 }
 nav{
     position: relative;
@@ -14,8 +26,9 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #F7A76C;
+    background-color: var(--nav-background-color);
     color: white;
+    transition: .4s all ease;
 }
 nav h1{
     display: flex;
@@ -70,6 +83,7 @@ nav ul li a{
     padding: 40px 0;
     width: 1200px;
     margin: auto;
+    color: var(--font-color);
 }
 .container h1{
     font-size: 35px;
@@ -109,10 +123,11 @@ nav ul li a{
     border-radius: 10px;
     color: white;
     margin-top: 20px;
-    background-color: #F7A76C;
+    background-color: var(--nav-background-color);
     width: 360px;
     padding: 15px;
     text-decoration: none;
+    transition: .4s all ease;
 }
 @media screen and (max-width: 1024px) {
     .cardNote{
@@ -137,6 +152,7 @@ nav ul li a{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: var(--font-color);
 }
 .content-detail{
     padding-top: 20px;
@@ -148,14 +164,21 @@ nav ul li a{
     display: flex;
     flex-direction: column;
 }
-
+.wrap-input{
+    text-align: start;
+    margin-bottom: 20px;
+    display: flex; 
+    flex-direction: column;
+}
+.wrap-input p{
+    color: red;
+}
 .form-input input , textarea, button{
     padding: 20px;
-    background-color: #F7A76C;
+    background-color: var(--nav-background-color);
     color: white;
     border: none;
     border-radius: 10px;
-    margin-bottom: 20px;
 }
 .form-input input::placeholder, textarea::placeholder {
     color: rgb(247, 243, 243);
@@ -165,7 +188,7 @@ nav ul li a{
     margin-top: 20px;
     padding: 10px 15px;
     width: 300px;
-    border: 2px solid #F7A76C;
+    border: 2px solid var(--nav-background-color);
     border-radius: 8px;
 }
 
@@ -186,4 +209,13 @@ nav ul li a{
 }
 .btn-auth{
     padding: 15px 20px;
+    margin-bottom: 15px;
+}
+/* end login */
+
+.wrap-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--font-color);
 }

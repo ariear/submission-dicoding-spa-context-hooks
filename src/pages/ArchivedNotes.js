@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useSearchParams } from 'react-router-dom';
 import NoteList from "../components/NoteList"
 import SearchBar from "../components/SearchBar"
+import LocaleContext from "../contexts/LocaleContext";
 import { getArchivedNotes } from "../utils/network-data"
 
 const ArchivedNotes = () => {
+    const {locale} = useContext(LocaleContext)
+
     const [searchParams, setSearchParams] = useSearchParams();
   
     const [keyword,setKeyword] = useState(searchParams.get('keyword') || '')
 
     const [notes,setNotes] = useState([])
+    const [loading,setLoading] = useState(true)
 
     const onKeywordChangeHandler = (keyword) => {
         setKeyword(keyword)
@@ -17,8 +21,10 @@ const ArchivedNotes = () => {
       }
       
     const getArchiveNotesHandle = async () => {
+        setLoading(true)
         const {data} = await getArchivedNotes()
         setNotes(data)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -27,9 +33,9 @@ const ArchivedNotes = () => {
 
     return(
         <div className="container">
-        <h1>Archived Notes</h1>
+        <h1>{locale === 'id' ? 'Catatan Terarsip' : 'Archived Notes'}</h1>
         <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
-        <NoteList notes={notes} keyword={keyword} messageNotFound="Arsip kosong" />
+        <NoteList notes={notes} loading={loading} keyword={keyword} messageNotFound="Arsip kosong" />
         </div>
     )
 }
